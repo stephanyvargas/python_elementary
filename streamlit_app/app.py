@@ -4,13 +4,24 @@ import streamlit as st
 import json
 import os
 
+
+# add python PATH
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from streamlit_pages.python_onsite_compiler import python_onsite_compiler
+
+
 # File path for storing questionnaire answers
 DATA_FILE = "student_answers.json"
+
 
 # Function to save data to a JSON file
 def save_answers(data):
     with open(DATA_FILE, "w") as file:
         json.dump(data, file)
+
 
 # Function to load data from a JSON file
 def load_answers():
@@ -19,13 +30,16 @@ def load_answers():
             return json.load(file)
     return {}
 
+
 # Streamlit app layout
 st.title("Python Elementary School Lessons")
 st.sidebar.title("Lesson Navigation")
 st.write("👋 Welcome to the interactive Python lessons!")
 
+
 # Navigation for lesson pages
-page = st.sidebar.selectbox("Select a lesson", ["Intro", "Make a Turtle", "Other"])
+page = st.sidebar.selectbox("Select a lesson", ["Intro", "Python Compiler", "Make a Turtle", "Other"])
+
 
 if page == "Intro":
     st.write("### Intro 📝")
@@ -46,6 +60,7 @@ if page == "Intro":
     favorite_food = st.text_input("9. 🍕 What is your favorite food?", value=answers.get("favorite_food", ""))
     favorite_subject = st.text_input("10. 📚 What is your favorite subject in school?", value=answers.get("favorite_subject", ""))
 
+
     # Store answers in a dictionary
     new_answers = {
         "name": name,
@@ -60,6 +75,7 @@ if page == "Intro":
         "favorite_subject": favorite_subject
     }
 
+
     # Display the submitted answers and save them to a file
     if st.button("Submit"):
         save_answers(new_answers)
@@ -68,6 +84,8 @@ if page == "Intro":
             st.write(f"**{key.replace('_', ' ').capitalize()}:** {value}")
         st.write("🎉 Great job completing the questionnaire!")
 
+elif page == "Python Compiler":
+    python_onsite_compiler()
 elif page == "Make a Turtle":
     st.write("### Make a Turtle 🐢")
     # Add content or load from streamlit_pages
