@@ -10,7 +10,10 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# import pages
+from streamlit_pages.python_first_steps import python_first_steps
 from streamlit_pages.python_onsite_compiler import python_onsite_compiler
+from streamlit_pages.mix_colors import mix_colors
 
 
 # File path for storing questionnaire answers
@@ -36,10 +39,14 @@ st.title("Python Elementary School Lessons")
 st.sidebar.title("Lesson Navigation")
 st.write("👋 Welcome to the interactive Python lessons!")
 
-
 # Navigation for lesson pages
-page = st.sidebar.selectbox("Select a lesson", ["Intro", "Python Compiler", "Make a Turtle", "Other"])
+page = st.sidebar.selectbox("Select a lesson", ["Intro",
+                                                "Python First Steps",
+                                                "Mix Colors",
+                                                ])
 
+# Call the Python Compiler in the sidebar
+python_onsite_compiler()
 
 if page == "Intro":
     st.write("### Intro 📝")
@@ -84,14 +91,12 @@ if page == "Intro":
             st.write(f"**{key.replace('_', ' ').capitalize()}:** {value}")
         st.write("🎉 Great job completing the questionnaire!")
 
-elif page == "Python Compiler":
-    python_onsite_compiler()
-elif page == "Make a Turtle":
-    st.write("### Make a Turtle 🐢")
-    # Add content or load from streamlit_pages
+elif page == "Python First Steps":
+    python_first_steps()
+elif page == "Mix Colors":
+    mix_colors()
 elif page == "Other":
-    st.write("### Other 🎲")
-    # Add content or load from streamlit_pages
+    pass
+
 else:
     st.write("Choose a lesson from the sidebar to get started!")
-
