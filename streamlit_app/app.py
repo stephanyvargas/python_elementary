@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 # import pages
 from streamlit_pages.python_first_steps import python_first_steps
 from streamlit_pages.python_onsite_compiler import python_onsite_compiler
+from streamlit_pages.recipe import recipe
 from streamlit_pages.mix_colors import mix_colors
 
 
@@ -42,6 +43,7 @@ st.write("👋 Welcome to the interactive Python lessons!")
 # Navigation for lesson pages
 page = st.sidebar.selectbox("Select a lesson", ["Intro",
                                                 "Python First Steps",
+                                                "Recipe Generator",
                                                 "Mix Colors",
                                                 ])
 
@@ -95,6 +97,8 @@ elif page == "Python First Steps":
     python_first_steps()
 elif page == "Mix Colors":
     mix_colors()
+elif page == "Recipe Generator":
+    recipe()
 elif page == "Other":
     pass
 
